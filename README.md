@@ -2,7 +2,9 @@
 
 ### First week homework for Skill Distillery
 
-### Overview (explanation of what it is)
+### Overview
+
+This program simulates a cash transaction interface.
 
 ### How to run
 
