@@ -4,39 +4,57 @@ public class MakeChangeApp {
 
 	public static void main(String[] args) {
 		Scanner key = new Scanner(System.in);
-		double price = getPrice();
-		double payment = getPayment();
-		int intPrice = dblToIntPrice(price);
-		int intPayment = dblToIntPayment(payment);
-		int customerChange = saleSystem(intPayment, intPrice);
-		changeSystem(customerChange);
-		if (customerChange < 0) {
-			changeNeeded(intPayment, intPrice);
+		cashRegister();
+	}
+	
+//		double price = getPrice();
+//		double payment = getPayment();
+//		int intPrice = dblToIntPrice(price);
+//		int intPayment = dblToIntPayment(payment);
+//		int customerChange = saleSystem(intPayment, intPrice);
+//		if (customerChange < 0) {
+//			changeNeeded(intPayment, intPrice);
+//		}
+//		else if (customerChange >= 0) {
+//			changeSystem(customerChange);
+//		}
+	
+		public static String cashRegister() {
+			String cashRegisterReturn = "";
+			Scanner kb = new Scanner(System.in);
+		boolean keepGoing = true;
+		System.out.println("Fancy Store Name\n");
+		while (keepGoing) {
+			System.out.println("Main Menu");
+			System.out.println("Press (1) for register or (2) to exit");
+			String makeChange = kb.next();
+			switch (makeChange) {
+			case "1": 
+				double price = getPrice();
+				double payment = getPayment();
+				int intPrice = dblToIntPrice(price);
+				int intPayment = dblToIntPayment(payment);
+				int customerChange = saleSystem(intPayment, intPrice);
+				if (customerChange < 0) {
+					changeNeeded(intPayment, intPrice);
+				}
+				else if (customerChange >= 0) {
+					changeSystem(customerChange);
+				}
+				break;
+			case "2":
+				System.out.println("Have a nice day!");
+				keepGoing = false;
+				break;
+			default:
+				System.out.println("Wrong input, please press 1 or 2");
+				break;
+			}
 		}
-
-		key.close();
+		return cashRegisterReturn;
 
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	public static String changeSystem(int customerChange) {
@@ -59,16 +77,16 @@ public class MakeChangeApp {
 		if (customerChange < 0) {
 			System.out.println("ERROR NOT ENOUGH MONEY");
 		} else if (customerChange == 0) {
-			System.out.println("Exact change thank you");
+			System.out.println("Exact change thank you\n");
 		} else {
 			System.out.println("Customer change is: ");
 		}
-		
+
 		int twentyDollars = 0, tenDollars = 0, fiveDollars = 0, oneDollar = 0, quarter = 0, dime = 0, nickel = 0,
 				penny = 0;
 
-		String totalChangeString = " ";
-		
+		String totalChangeString = "";
+
 		while (customerChange > 0) {
 			if (customerChange >= 2000) {
 				customerChange = customerChange - 2000;
@@ -133,26 +151,31 @@ public class MakeChangeApp {
 				} else if (customerChange == 0 && penny >= 0) {
 					System.out.println(penny + " Pennies");
 				}
+			}
+			if (customerChange == 0) {
+				System.out.println("\n Thank You \n");
 			}
 		}
 		return totalChangeString;
 
 	}
-	
+
 	public static int changeNeeded(int intPayment, int intPrice) {
-		
+
 		int customerChange = intPayment - intPrice;
 		customerChange = Math.abs(customerChange);
 		System.out.println("***************ERROR******************");
-		System.out.println("Customer still needs to pay \n $"+ customerChange + "\n");
-	
+		System.out.println("Customer still needs to pay \n $" + (customerChange * .01) + "\n");
+
+//		changeSystem(customerChange);
+
 		int changeRemaining = 0;
-		
+//		
 		int twentyDollars = 0, tenDollars = 0, fiveDollars = 0, oneDollar = 0, quarter = 0, dime = 0, nickel = 0,
 				penny = 0;
 
 		String totalChangeString = " ";
-		
+
 		while (customerChange > 0) {
 			if (customerChange >= 2000) {
 				customerChange = customerChange - 2000;
@@ -220,15 +243,13 @@ public class MakeChangeApp {
 			}
 		}
 
-		
 		System.out.println("\n***************ERROR******************");
 		return changeRemaining;
 	}
-		
 
 	public static int saleSystem(int intPayment, int intPrice) {
 		int customerChange = intPayment - intPrice;
-		
+
 		return customerChange;
 	}
 
@@ -246,7 +267,7 @@ public class MakeChangeApp {
 
 	public static double getPrice() {
 		Scanner kb = new Scanner(System.in);
-		System.out.println("Enter price of item : ");
+		System.out.print("Enter price of item : \n$");
 		double price = kb.nextDouble();
 
 		return price;
@@ -254,14 +275,12 @@ public class MakeChangeApp {
 
 	public static double getPayment() {
 		Scanner kb = new Scanner(System.in);
-		System.out.println("Enter customer payment : ");
+		System.out.print("Enter customer payment : \n$");
 		double payment = kb.nextDouble();
 
-		kb.close();
 		return payment;
 	}
 
-	
 //	public static void menuBackground() {
 //		System.out.println("////////////////////////////");
 //		System.out.println("////////////////////////////");
