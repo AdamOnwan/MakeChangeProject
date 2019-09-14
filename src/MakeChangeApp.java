@@ -4,79 +4,87 @@ public class MakeChangeApp {
 
 	public static void main(String[] args) {
 		Scanner kb = new Scanner(System.in);
+		
+		System.out.println("Enter price of item : ");
 		double price = kb.nextDouble();
+		System.out.println("Enter customer payment : ");
 		double payment = kb.nextDouble();
 
+		int intPrice = (int) (price * 100 + .5);
+		int intPayment = (int) (payment * 100 +.5);
+		
 		int twentyDollars = 0, tenDollars = 0, fiveDollars = 0, oneDollar = 0, quarter = 0, dime = 0, nickel = 0,
 				penny = 0;
-		System.out.println("hand the customer");
 
-		double customerChange = payment - price;
-		System.out.println("change before: " + customerChange);
-		while (customerChange > 0) {
-			if (customerChange > 19) {
-				customerChange = customerChange - 20;
+
+		int customerChange = intPayment - intPrice;
+		
+		while (customerChange > 0) 
+			System.out.println("hand the customer");
+		
+		{
+			if (customerChange >= 2000) {
+				customerChange = customerChange - 2000;
 				twentyDollars++;
-				if (twentyDollars > 39.99) {
-					customerChange = customerChange - 20;
-					twentyDollars++;
-					if (customerChange <= 19.99 && twentyDollars > 0)
-					System.out.println(twentyDollars + "Twenty dollars");
-					continue;
-				}
-			} else if (customerChange > 19.99) {
-				customerChange = customerChange - 10;
+				if (customerChange <= 1999 && twentyDollars > 0)
+					System.out.println(twentyDollars + " Twenty dollars");
+			} else if (customerChange >= 1000) {
+				customerChange = customerChange - 1000;
 				tenDollars++;
-				if (customerChange <= 9.99 && tenDollars > 0) {
-					System.out.println(tenDollars + "Ten dollars");
-					continue;
+				if (customerChange <= 999 && tenDollars > 0) {
+					System.out.println(tenDollars + " Ten dollars");
 				}
-			} else if (customerChange > 9.99 ) {
-				customerChange = customerChange - 5;
+			} else if (customerChange >= 500) {
+				customerChange = customerChange - 500;
 				fiveDollars++;
-				if (customerChange <= 4.99 && fiveDollars > 0) {
-					System.out.println(fiveDollars + "Five dollars");
-					continue;
+				if (customerChange <= 499 && fiveDollars > 0) {
+					System.out.println(fiveDollars + " Five dollars");
 				}
-			} else if (customerChange > 1.99) {
-				customerChange = customerChange - 1;
+			} else if (customerChange >= 100) {
+				customerChange = customerChange - 100;
 				oneDollar++;
-				if (customerChange <= 0 && oneDollar > 0) {
+				if (customerChange <= 99 && oneDollar > 0) {
 					System.out.println(oneDollar + " One dollars");
-					System.out.println("change afer: " + customerChange);
-					continue;
 				}
-			} else if (customerChange > .24) {
-				customerChange = customerChange - .25;
+			} else if (customerChange >= 25) {
+				customerChange = customerChange - 25;
 				quarter++;
-				if (quarter >= 1) {
-					System.out.println(quarter + "Quarters");
-					continue;
+				if (customerChange <=24 && quarter >= 1) {
+					System.out.println(quarter + " Quarters");
 				}
-			} else if (customerChange > .09) {
-				customerChange = customerChange - .1;
+			} else if (customerChange >= 10) {
+				customerChange = customerChange - 10;
 				dime++;
-				if (dime >= 1) {
-					System.out.println(dime + "Dimes");
+				if (customerChange <=9 && dime >= 1) {
+					System.out.println(dime + " Dimes");
 				}
-			} else if (customerChange > .04) {
-				customerChange = customerChange - .05;
+			} else if (customerChange >= 5) {
+				customerChange = customerChange - 5;
 				nickel++;
-				if (nickel >= 1) {
-					System.out.println(nickel + "Nickels");
+				if (customerChange <=4 && nickel >= 1) {
+					System.out.println(nickel + " Nickels");
 				}
-			} else if (customerChange > .01) {
-				customerChange = customerChange - .01;
+			} else if (customerChange > 0) {
+				customerChange = customerChange - 1;
 				penny++;
-				if (penny >= 1) {
-					System.out.println(penny + "Pennies");
+				if (customerChange == 0 && penny >= 0) {
+					System.out.println(penny + " Pennies");
 				}
 			}
-			System.out.println("change remaining: " + customerChange);
 		}
+		
+		if (customerChange < 0) {
+			System.out.println("ERROR NOT ENOUGH MONEY");
+		}
+		
 		kb.close();
 
 	}
+}
+
+
+
+
 
 //	public static double itemPrice() {
 //		Scanner kb = new Scanner(System.in);
@@ -95,7 +103,6 @@ public class MakeChangeApp {
 //		return payment;
 //
 //	}
-}
 
 //Make Change (Cash Register)
 //Denominations that are not used should not be displayed.
@@ -119,11 +126,7 @@ public class MakeChangeApp {
 //You will be given either a pass or fail based on whether your code
 //works given all of the following test conditions:
 //
-//Amount: .67, Tendered: .50, Result: Error message
-//Amount: .67, Tendered: 1.00, Result: 1 quarter, 1 nickel, 3 pennies.
-//Amount: .59, Tendered: 1.00, Result: 1 quarter, 1 dime, 1 nickel, 
-//1 penny.
-//Amount: 3.96, Tendered: 20.00, Result: 1 ten dollar bill, 1 five 
+//Amount: .6719dered: 20.00, Result: 1 ten dollar bill, 1 five 
 //dollar bill, 1 one dollar bill, 4 pennies.
 //Amount: any amount less than 20.00, Tendered: anything greater than 
 //amount: correct denominations for correct change.
