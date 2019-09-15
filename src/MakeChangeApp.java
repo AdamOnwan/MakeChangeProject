@@ -6,7 +6,7 @@ public class MakeChangeApp {
 	public static void main(String[] args) {
 		cashRegister();
 	}
-//Have to put df.format(customerChange); on every customerChange
+
 	public static String cashRegister() {
 		String cashRegisterReturn = "";
 		Scanner kb = new Scanner(System.in);
@@ -16,28 +16,36 @@ public class MakeChangeApp {
 			System.out.println("Main Menu");
 			System.out.println("Press (1) for register or (2) to exit");
 			String makeChange = kb.next();
+
 			switch (makeChange) {
 			case "1":
-//				makeChangeApp();
 				double price = getPrice();
 				double payment = getPayment();
 				double customerChange = saleSystem(payment, price);
 				if (customerChange < 0) {
-					double remainingPrice = changeNeeded(payment, price);
-//					System.out.println("Press (1) for continue payment (2) to return to main menu or (3) to exit");
-//					switch(makeChange) {
-//					case "1":
-//						double newPayment = getPayment();
-//						double newCustomerChange = contSaleSystem(newPayment, remainingPrice);
-//						if (newCustomerChange < 0) {
-//							changeNeeded(newPayment, remainingPrice);
-//						} else if (newCustomerChange >= 0) {
-//							changeSystem(newCustomerChange);
-//						}
-//						break;
-//					case "2":
-//						cashRegister();
-					break;
+					while (keepGoing) {
+						System.out.println("Press (1) for continue payment (2) to return to main menu or (3) to exit");
+						String nextMakeChange = kb.next();
+						switch (nextMakeChange) {
+						case "1":
+							double remainingPrice = changeNeeded(payment, price);
+							double newPayment = getPayment();
+							double newCustomerChange = contSaleSystem(newPayment, remainingPrice);
+							if (newCustomerChange < 0) {
+								changeNeeded(newPayment, remainingPrice);
+							} else if (newCustomerChange >= 0) {
+								changeSystem(newCustomerChange);
+							}
+							break;
+						case "2":
+							cashRegister();
+							break;
+						case "3":
+							System.out.println("Goodbye");
+							keepGoing = false;
+							break;
+						}
+					}
 				} else if (customerChange >= 0) {
 					changeSystem(customerChange);
 				}
@@ -54,19 +62,19 @@ public class MakeChangeApp {
 		return cashRegisterReturn;
 	}
 
-//	public static double makeChangeApp() {
-//		double change = 0;
-//		
-//		double price = getPrice();
-//		double payment = getPayment();
-//		double customerChange = saleSystem(payment, price);
-//		if (customerChange < 0) {
-//			double remainingPrice = changeNeeded(payment, price);
-//		} else if (customerChange >= 0) {
-//			changeSystem(customerChange);
-//		}
-//		return change;
-//	}
+	public static double makeChangeApp() {
+		double change = 0;
+
+		double price = getPrice();
+		double payment = getPayment();
+		double customerChange = saleSystem(payment, price);
+		if (customerChange < 0) {
+			double remainingPrice = changeNeeded(payment, price);
+		} else if (customerChange >= 0) {
+			changeSystem(customerChange);
+		}
+		return change;
+	}
 
 	public static String changeSystem(double customerChange) {
 
@@ -262,6 +270,7 @@ public class MakeChangeApp {
 		Scanner kb = new Scanner(System.in);
 		System.out.print("Enter price of item : \n$");
 		double price = kb.nextDouble();
+		System.out.println("Inform customer the item costs: $" + price);
 
 		return price;
 	}
