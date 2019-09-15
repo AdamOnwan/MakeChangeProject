@@ -6,12 +6,12 @@ public class MakeChangeApp {
 	public static void main(String[] args) {
 		cashRegister();
 	}
-
+//Have to put df.format(customerChange); on every customerChange
 	public static String cashRegister() {
 		String cashRegisterReturn = "";
 		Scanner kb = new Scanner(System.in);
 		boolean keepGoing = true;
-		System.out.println("Big Al's Warcamp Hut\n");
+		System.out.println("Welcome to Plane of Knowledge\n");
 		while (keepGoing) {
 			System.out.println("Main Menu");
 			System.out.println("Press (1) for register or (2) to exit");
@@ -79,7 +79,7 @@ public class MakeChangeApp {
 		} else if (customerChange == 0) {
 			System.out.println("Exact change thank you\n");
 		} else {
-			System.out.println("Customer change is: $" + customerChange);
+			System.out.println("Customer change is: $" + df.format(customerChange));
 		}
 
 		int twentyDollars = 0, tenDollars = 0, fiveDollars = 0, oneDollar = 0, quarter = 0, dime = 0, nickel = 0,
@@ -140,7 +140,6 @@ public class MakeChangeApp {
 				nickel++;
 				if (customerChange <= .04 && nickel == 1) {
 					System.out.println(nickel + " Nickel");
-					System.out.println(customerChange);
 				} else if (customerChange <= .04 && nickel >= 1) {
 					System.out.println(nickel + " Nickels");
 				}
