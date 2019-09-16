@@ -11,11 +11,10 @@ This program simulates a cash transaction interface.
 2. Step 2 Using the app
 #### Installation
 1. Copy code and save it to a .java file
-2. Open command prompt or terminal and goto the location where you saved file
-3. Compile the .java to .class using javac command, you may need to install JDK8.
-   ex. my filename for this app is MakeChangeApp
-   so I type in terminal: javac MakeChangeApp.javac
-4. Now execute the file using java command
+2. Open command prompt or terminal and goto the location where you saved file [TIP] use ls and cd commands
+3. Compile the .java to .class using javac command, [TIP]you may need to install JDK8. ex. my filename for this app is MakeChangeApp so,
+I type in terminal: javac MakeChangeApp.java
+4. Now execute the file in the terminal using java command
    ex. java MakeChangeApp
 #### Using the app
 1. You are first greeted by the welcome screen and then immediately goto the main menu
